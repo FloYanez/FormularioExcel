@@ -1,21 +1,42 @@
 from tkinter import *
 from openpyxl import load_workbook
 
-file_name = "Registro Datos.xlsm"
-wb = load_workbook(file_name)
-
-sheet = wb.active
-target = wb.copy_worksheet(sheet)
-
 
 # Limpia formulario
 def limpiar():
-    saludo.config(text="hola")
+    pass
+
+
+def collect_data():
+    return [fecha_entry.get(),
+            n_op_entry.get(),
+            codigo_entry.get(),
+            programado_entry.get(),
+            efectivo_entry.get(),
+            defectuosos_entry.get(),
+            hora_inicio_op_entry.get(),
+            hora_termino_op_entry.get(),
+            dotacion_entry.get(),
+            hhee_entry.get(),
+            paros_programados_entry.get(),
+            paros_por_fallas_entry.get(),
+            descripcion_pp_entry.get(),
+            descripcion_pnp_entry.get()]
 
 
 # Guarda info en excel
 def guardar():
-    saludo.config(text="hello")
+    data = collect_data()
+    file_name = "Registro Datos.xlsx"
+    wb = load_workbook(file_name)
+    ws = wb["BD"]
+    row = ws.max_row + 1
+
+    for column in range(2, 16):
+        ws.cell(row=row, column=column).value = data[column-2]
+
+    wb.template = False
+    wb.save(file_name)
 
 
 # crear ventana (con barra de título)
