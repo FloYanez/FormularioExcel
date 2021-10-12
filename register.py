@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-from tkcalendar import DateEntry
 from openpyxl import load_workbook
 
 
@@ -26,7 +25,7 @@ class Register(tk.Tk):
         heading.grid(column=0, row=0, columnspan=2, pady=5, sticky=tk.N)
 
         # Fecha
-        fecha = DateEntry()
+        fecha = tk.StringVar()
         fecha_label = ttk.Label(self, text="Fecha:")
         fecha_label.grid(column=0, row=1, sticky=tk.W, **paddings)
         self.fecha_entry = ttk.Entry(self, textvariable=fecha, **entry_font)
